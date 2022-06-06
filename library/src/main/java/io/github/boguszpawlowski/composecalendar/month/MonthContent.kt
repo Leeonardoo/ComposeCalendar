@@ -37,6 +37,7 @@ internal fun <T : SelectionState> MonthPager(
   selectionState: T,
   monthState: MonthState,
   daysOfWeek: List<DayOfWeek>,
+  alwaysSameWeekCount: Boolean,
   today: LocalDate,
   modifier: Modifier = Modifier,
   dayContent: @Composable BoxScope.(DayState<T>) -> Unit,
@@ -67,6 +68,7 @@ internal fun <T : SelectionState> MonthPager(
       currentMonth = monthPagerState.getMonthForPage(index.toIndex()),
       today = today,
       daysOfWeek = daysOfWeek,
+      alwaysSameWeekCount = alwaysSameWeekCount,
       dayContent = dayContent,
       weekHeader = weekHeader,
       monthContainer = monthContainer
@@ -74,13 +76,13 @@ internal fun <T : SelectionState> MonthPager(
   }
 }
 
-@OptIn(ExperimentalPagerApi::class)
 @Composable
 internal fun <T : SelectionState> MonthContent(
   showAdjacentMonths: Boolean,
   selectionState: T,
   currentMonth: YearMonth,
   daysOfWeek: List<DayOfWeek>,
+  alwaysSameWeekCount: Boolean,
   today: LocalDate,
   modifier: Modifier = Modifier,
   dayContent: @Composable BoxScope.(DayState<T>) -> Unit,
@@ -103,6 +105,7 @@ internal fun <T : SelectionState> MonthContent(
       ) {
         currentMonth.getWeeks(
           includeAdjacentMonths = showAdjacentMonths,
+          alwaysSameWeekCount = alwaysSameWeekCount,
           firstDayOfTheWeek = daysOfWeek.first(),
           today = today,
         ).forEach { week ->
