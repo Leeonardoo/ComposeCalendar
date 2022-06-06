@@ -6,18 +6,18 @@ object MavenPublish {
 
 object AndroidSdk {
   const val Min = 21
-  const val Compile = 31
+  const val Compile = 32
   const val Target = Compile
 }
 
 object Kotlin {
-  const val Version = "1.6.10"
-  const val CompatibilityPluginVersion = "0.8.0"
+  const val Version = "1.6.21"
+  const val CompatibilityPluginVersion = "0.10.0"
 
   const val GradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$Version"
   const val DokkaGradlePlugin = "org.jetbrains.dokka:dokka-gradle-plugin:1.5.0"
 
-  const val SafeArgsPlugin = "androidx.navigation:navigation-safe-args-gradle-plugin:2.2.0"
+  const val SafeArgsPlugin = "androidx.navigation:navigation-safe-args-gradle-plugin:2.5.0-rc01"
 
   const val AndroidPluginId = "android"
   const val KaptPluginId = "kapt"
@@ -34,7 +34,7 @@ object Kotlin {
 }
 
 object Android {
-  const val GradlePlugin = "com.android.tools.build:gradle:7.1.2"
+  const val GradlePlugin = "com.android.tools.build:gradle:7.2.1"
 
   const val ApplicationPluginId = "com.android.application"
   const val LibraryPluginId = "com.android.library"
@@ -74,16 +74,16 @@ object Shipkit {
 }
 
 object Coroutines {
-  const val Version = "1.4.3"
+  const val Version = "1.6.1"
 
   const val Core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$Version"
 }
 
 object AndroidX {
   const val Version = "1.0.0"
-  const val LifecycleVersion = "2.2.0"
+  const val LifecycleVersion = "2.5.0-rc01"
 
-  const val AppCompat = "androidx.appcompat:appcompat:1.4.1"
+  const val AppCompat = "androidx.appcompat:appcompat:1.4.2"
   const val ComposeActivity = "androidx.activity:activity-compose:1.4.0"
 }
 
@@ -107,8 +107,8 @@ object Timber {
 }
 
 object Compose {
-  const val Version = "1.1.1"
-  const val AccompanistVersion = "0.23.1"
+  const val Version = "1.2.0-beta03"
+  const val AccompanistVersion = "0.24.9-beta"
 
   const val Runtime = "androidx.compose.runtime:runtime:$Version"
   const val Compiler = "androidx.compose.compiler:compiler:$Version"
@@ -119,7 +119,7 @@ object Compose {
   const val UiTooling = "androidx.compose.ui:ui-tooling:$Version"
   const val MaterialIconsExtended = "androidx.compose.material:material-icons-extended:$Version"
   const val AccompanistPager = "com.google.accompanist:accompanist-pager:$AccompanistVersion"
-  const val Navigation = "androidx.navigation:navigation-compose:2.5.0-alpha03"
+  const val Navigation = "androidx.navigation:navigation-compose:2.5.0-rc01"
   const val Testing = "androidx.compose.ui:ui-test:$Version"
   const val JunitTesting = "androidx.compose.ui:ui-test-junit4:$Version"
 }
