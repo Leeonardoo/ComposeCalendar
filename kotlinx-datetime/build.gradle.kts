@@ -21,6 +21,6 @@ dependencies {
 plugins.withId("com.vanniktech.maven.publish") {
   mavenPublish {
     sonatypeHost = SonatypeHost.S01
-    releaseSigningEnabled = true
+    releaseSigningEnabled = false
   }
 }
