@@ -24,6 +24,8 @@ import io.github.boguszpawlowski.composecalendar.selection.EmptySelectionState
 import io.github.boguszpawlowski.composecalendar.selection.SelectionMode
 import io.github.boguszpawlowski.composecalendar.selection.SelectionState
 import io.github.boguszpawlowski.composecalendar.week.DefaultWeekHeader
+import io.github.boguszpawlowski.composecalendar.week.Week
+import io.github.boguszpawlowski.composecalendar.week.WeekContent
 import io.github.boguszpawlowski.composecalendar.week.rotateRight
 import java.time.DayOfWeek
 import java.time.LocalDate
@@ -75,6 +77,13 @@ public fun SelectableCalendar(
   horizontalSwipeEnabled: Boolean = true,
   calendarState: CalendarState<DynamicSelectionState> = rememberSelectableCalendarState(),
   dayContent: @Composable BoxScope.(DayState<DynamicSelectionState>) -> Unit = { DefaultDay(it) },
+  weekContent: @Composable ColumnScope.(Week, DynamicSelectionState, @Composable BoxScope.(DayState<DynamicSelectionState>) -> Unit) -> Unit = { week, selectionState, dayContent ->
+    WeekContent(
+      week = week,
+      selectionState = selectionState,
+      dayContent = dayContent,
+    )
+  },
   monthHeader: @Composable ColumnScope.(MonthState) -> Unit = { DefaultMonthHeader(it) },
   weekHeader: @Composable BoxScope.(List<DayOfWeek>) -> Unit = { DefaultWeekHeader(it) },
   monthContainer: @Composable (content: @Composable (PaddingValues) -> Unit) -> Unit = { content ->
@@ -90,6 +99,7 @@ public fun SelectableCalendar(
     horizontalSwipeEnabled = horizontalSwipeEnabled,
     calendarState = calendarState,
     dayContent = dayContent,
+    weekContent = weekContent,
     monthHeader = monthHeader,
     weekHeader = weekHeader,
     monthContainer = monthContainer
@@ -128,6 +138,13 @@ public fun StaticCalendar(
   horizontalSwipeEnabled: Boolean = true,
   calendarState: CalendarState<EmptySelectionState> = rememberCalendarState(),
   dayContent: @Composable BoxScope.(DayState<EmptySelectionState>) -> Unit = { DefaultDay(it) },
+  weekContent: @Composable ColumnScope.(Week, EmptySelectionState, @Composable BoxScope.(DayState<EmptySelectionState>) -> Unit) -> Unit = { week, selectionState, dayContent ->
+    WeekContent(
+      week = week,
+      selectionState = selectionState,
+      dayContent = dayContent,
+    )
+  },
   monthHeader: @Composable ColumnScope.(MonthState) -> Unit = { DefaultMonthHeader(it) },
   weekHeader: @Composable BoxScope.(List<DayOfWeek>) -> Unit = { DefaultWeekHeader(it) },
   monthContainer: @Composable (content: @Composable (PaddingValues) -> Unit) -> Unit = { content ->
@@ -143,6 +160,7 @@ public fun StaticCalendar(
     horizontalSwipeEnabled = horizontalSwipeEnabled,
     calendarState = calendarState,
     dayContent = dayContent,
+    weekContent = weekContent,
     monthHeader = monthHeader,
     weekHeader = weekHeader,
     monthContainer = monthContainer
@@ -176,6 +194,13 @@ public fun <T : SelectionState> Calendar(
   alwaysSameWeekCount: Boolean = false,
   horizontalSwipeEnabled: Boolean = true,
   dayContent: @Composable BoxScope.(DayState<T>) -> Unit = { DefaultDay(it) },
+  weekContent: @Composable ColumnScope.(Week, T, @Composable BoxScope.(DayState<T>) -> Unit) -> Unit = { week, selectionState, dayContent ->
+    WeekContent(
+      week = week,
+      selectionState = selectionState,
+      dayContent = dayContent,
+    )
+  },
   monthHeader: @Composable ColumnScope.(MonthState) -> Unit = { DefaultMonthHeader(it) },
   weekHeader: @Composable BoxScope.(List<DayOfWeek>) -> Unit = { DefaultWeekHeader(it) },
   monthContainer: @Composable (content: @Composable (PaddingValues) -> Unit) -> Unit = { content ->
@@ -200,6 +225,7 @@ public fun <T : SelectionState> Calendar(
         daysOfWeek = daysOfWeek,
         alwaysSameWeekCount = alwaysSameWeekCount,
         dayContent = dayContent,
+        weekContent = weekContent,
         weekHeader = weekHeader,
         monthContainer = monthContainer,
       )
@@ -212,6 +238,7 @@ public fun <T : SelectionState> Calendar(
         daysOfWeek = daysOfWeek,
         alwaysSameWeekCount = alwaysSameWeekCount,
         dayContent = dayContent,
+        weekContent = weekContent,
         weekHeader = weekHeader,
         monthContainer = monthContainer,
       )

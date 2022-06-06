@@ -3,6 +3,7 @@ package io.github.boguszpawlowski.composecalendar.month
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -22,7 +23,7 @@ import io.github.boguszpawlowski.composecalendar.header.MonthState
 import io.github.boguszpawlowski.composecalendar.pager.PagerItemCount
 import io.github.boguszpawlowski.composecalendar.pager.toIndex
 import io.github.boguszpawlowski.composecalendar.selection.SelectionState
-import io.github.boguszpawlowski.composecalendar.week.WeekContent
+import io.github.boguszpawlowski.composecalendar.week.Week
 import io.github.boguszpawlowski.composecalendar.week.getWeeks
 import java.time.DayOfWeek
 import java.time.LocalDate
@@ -41,6 +42,7 @@ internal fun <T : SelectionState> MonthPager(
   today: LocalDate,
   modifier: Modifier = Modifier,
   dayContent: @Composable BoxScope.(DayState<T>) -> Unit,
+  weekContent: @Composable ColumnScope.(Week, T, @Composable BoxScope.(DayState<T>) -> Unit) -> Unit,
   weekHeader: @Composable BoxScope.(List<DayOfWeek>) -> Unit,
   monthContainer: @Composable (content: @Composable (PaddingValues) -> Unit) -> Unit,
 ) {
@@ -70,6 +72,7 @@ internal fun <T : SelectionState> MonthPager(
       daysOfWeek = daysOfWeek,
       alwaysSameWeekCount = alwaysSameWeekCount,
       dayContent = dayContent,
+      weekContent = weekContent,
       weekHeader = weekHeader,
       monthContainer = monthContainer
     )
@@ -86,6 +89,7 @@ internal fun <T : SelectionState> MonthContent(
   today: LocalDate,
   modifier: Modifier = Modifier,
   dayContent: @Composable BoxScope.(DayState<T>) -> Unit,
+  weekContent: @Composable ColumnScope.(Week, T, @Composable BoxScope.(DayState<T>) -> Unit) -> Unit,
   weekHeader: @Composable BoxScope.(List<DayOfWeek>) -> Unit,
   monthContainer: @Composable (content: @Composable (PaddingValues) -> Unit) -> Unit,
 ) {
@@ -103,17 +107,17 @@ internal fun <T : SelectionState> MonthContent(
           .wrapContentWidth()
           .padding(paddingValues)
       ) {
-        currentMonth.getWeeks(
-          includeAdjacentMonths = showAdjacentMonths,
-          alwaysSameWeekCount = alwaysSameWeekCount,
-          firstDayOfTheWeek = daysOfWeek.first(),
-          today = today,
-        ).forEach { week ->
-          WeekContent(
-            week = week,
-            selectionState = selectionState,
-            dayContent = dayContent,
+        val weeks = remember(currentMonth) {
+          currentMonth.getWeeks(
+            includeAdjacentMonths = showAdjacentMonths,
+            alwaysSameWeekCount = alwaysSameWeekCount,
+            firstDayOfTheWeek = daysOfWeek.first(),
+            today = today,
           )
+        }
+
+        weeks.forEach { week ->
+          weekContent(week, selectionState, dayContent)
         }
       }
     }

@@ -25,7 +25,7 @@ internal const val PageCount = 3
 
 @OptIn(ExperimentalPagerApi::class)
 @Stable
-internal class MonthPagerState(
+public class MonthPagerState(
   coroutineScope: CoroutineScope,
   private val monthState: MonthState,
   private val pagerState: PagerState,
@@ -51,7 +51,7 @@ internal class MonthPagerState(
     }.launchIn(coroutineScope)
   }
 
-  fun getMonthForPage(@IntRange(from = 0, to = 2) index: Int) = monthProvider.cache[index]!!
+  public fun getMonthForPage(@IntRange(from = 0, to = 2) index: Int): YearMonth = monthProvider.cache[index]!!
 
   @SuppressLint("Range")
   private fun moveToMonth(month: YearMonth) {
