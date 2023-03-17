@@ -20,7 +20,6 @@ dependencies {
   implementation(Kotlin.StdLib)
   implementation(Compose.Ui)
   implementation(Compose.UiTooling)
-  implementation(Compose.AccompanistPager)
   implementation(Compose.Foundation)
   implementation(Compose.FoundationLayout)
   implementation(Compose.Material)

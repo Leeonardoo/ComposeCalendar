@@ -2,14 +2,14 @@ package io.github.boguszpawlowski.composecalendar.month
 
 import android.annotation.SuppressLint
 import androidx.annotation.IntRange
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.pager.PagerState
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.PagerState
 import io.github.boguszpawlowski.composecalendar.header.MonthState
 import io.github.boguszpawlowski.composecalendar.pager.currentIndex
 import io.github.boguszpawlowski.composecalendar.util.dec
@@ -23,14 +23,15 @@ import java.time.YearMonth
 
 internal const val PageCount = 3
 
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Stable
-public class MonthPagerState(
+public class MonthPagerState @OptIn(ExperimentalFoundationApi::class) constructor(
   coroutineScope: CoroutineScope,
   private val monthState: MonthState,
   private val pagerState: PagerState,
 ) {
 
+  @OptIn(ExperimentalFoundationApi::class)
   private var monthProvider by mutableStateOf(
     MonthProvider(
       initialMonth = monthState.currentMonth,

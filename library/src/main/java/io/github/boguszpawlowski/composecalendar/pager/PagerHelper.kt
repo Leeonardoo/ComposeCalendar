@@ -1,7 +1,7 @@
 package io.github.boguszpawlowski.composecalendar.pager
 
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.PagerState
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.pager.PagerState
 import io.github.boguszpawlowski.composecalendar.month.PageCount
 
 internal const val PagerItemCount = 20_000
@@ -15,6 +15,6 @@ private fun Int.floorMod(other: Int): Int = when (other) {
   else -> this - floorDiv(other) * other
 }
 
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 internal val PagerState.currentIndex
   get() = currentPage.toIndex()

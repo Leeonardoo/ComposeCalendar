@@ -37,7 +37,7 @@ allprojects {
 
   tasks.withType<KotlinCompile> {
     kotlinOptions {
-      jvmTarget = "11"
+      jvmTarget = "17"
       freeCompilerArgs = freeCompilerArgs + listOf(
         "-progressive",
         "-Xopt-in=kotlin.RequiresOptIn",

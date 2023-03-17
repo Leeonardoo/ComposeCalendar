@@ -1,5 +1,5 @@
 import com.android.build.gradle.BaseExtension
-import org.gradle.api.JavaVersion.VERSION_11
+import org.gradle.api.JavaVersion.VERSION_17
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -18,15 +18,15 @@ class CommonAndroidPlugin : Plugin<Project> {
       }
 
       compileOptions {
-        sourceCompatibility = VERSION_11
-        targetCompatibility = VERSION_11
+        sourceCompatibility = VERSION_17
+        targetCompatibility = VERSION_17
         isCoreLibraryDesugaringEnabled = true
       }
 
       buildFeatures.compose = true
 
       composeOptions {
-        kotlinCompilerExtensionVersion = Compose.Version
+        kotlinCompilerExtensionVersion = "1.4.3"
       }
 
       target.dependencies.add("coreLibraryDesugaring", Kotlin.DesugarJdkLibs)
